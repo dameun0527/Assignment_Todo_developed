@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.List;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
@@ -19,11 +21,13 @@ public class Schedule extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
     private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
+    private String content;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -31,8 +35,10 @@ public class Schedule extends BaseTime {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "content", nullable = false)
-    private String content;
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
+
+
 
     // 일정 생성
     @Builder
@@ -41,11 +47,6 @@ public class Schedule extends BaseTime {
         this.username = requestDto.getUsername();
         this.password = requestDto.getPassword();
         this.content = requestDto.getContent();
-    }
-
-    // 비밀번호 일치 여부 확인
-    public boolean checkPassword(String inputPassword) {
-        return inputPassword.equals(password);
     }
 
     @Builder
