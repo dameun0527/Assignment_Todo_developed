@@ -5,6 +5,8 @@ import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
 import com.sparta.assignment_todo_developed.entity.Schedule;
 import com.sparta.assignment_todo_developed.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +24,10 @@ public class ScheduleService {
     }
 
     // 일정 목록 조회
-    public List<Schedule> findAll() {
-        return scheduleRepository.findAll();
+    public Page<Schedule> getAllSchedules(Pageable pageable) {
+        return scheduleRepository.findAll(pageable);
     }
+
 
     // 선택 일정 조회
     public Schedule findById(Long id) {
