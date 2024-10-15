@@ -1,24 +1,21 @@
 package com.sparta.assignment_todo_developed.entity;
 
+import com.sparta.assignment_todo_developed.dto.schedule.CreateRequestDto;
+import com.sparta.assignment_todo_developed.dto.schedule.ScheduleDto;
+import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
-import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EnableJpaAuditing
-@Table(name="Schedule")
-public class Schedule {
+@Table(name = "Schedule")
+public class Schedule extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,29 +34,24 @@ public class Schedule {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @CreatedDate
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
+    // 일정 생성
     @Builder
-    public Schedule(String title, String username, String password, String content, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.title = title;
-        this.username = username;
-        this.password = password;
-        this.content = content;
-        this.createdAt = updatedAt != null ? updatedAt : LocalDateTime.now();
-        this.updatedAt = updatedAt != null ? updatedAt : LocalDateTime.now();
+    public Schedule(CreateRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.username = requestDto.getUsername();
+        this.password = requestDto.getPassword();
+        this.content = requestDto.getContent();
     }
 
-    public void update(String title, String username, String password, String content, LocalDateTime updatedAt) {
-        this.title = title;
-        this.username = username;
-        this.password = password;
-        this.content = content;
-        this.updatedAt = updatedAt != null ? updatedAt : LocalDateTime.now();
+    // 비밀번호 일치 여부 확인
+    public boolean checkPassword(String inputPassword) {
+        return inputPassword.equals(password);
+    }
+
+    @Builder
+    public void update(UpdateRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.username = requestDto.getUsername();
+        this.content = requestDto.getContent();
     }
 }
