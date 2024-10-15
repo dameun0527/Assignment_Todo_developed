@@ -1,4 +1,4 @@
 package com.sparta.assignment_todo_developed.repository;
 
-public class userRepository {
+public class UserRepository {
 }
