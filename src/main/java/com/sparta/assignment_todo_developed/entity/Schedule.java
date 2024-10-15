@@ -38,6 +38,9 @@ public class Schedule extends BaseTime {
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
+    @ManyToMany
+    private List<Member> members;
+
 
 
     // 일정 생성
