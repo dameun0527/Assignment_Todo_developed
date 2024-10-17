@@ -16,7 +16,7 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "Schedule")
+@Table(name = "schedule")
 public class Schedule extends BaseTime {
 
     @Id
@@ -29,33 +29,32 @@ public class Schedule extends BaseTime {
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(name = "username", nullable = false)
-    private String username;
-
     @Column(name = "password", nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "member_schedule",
+            joinColumns = @JoinColumn(name = "schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id")
+    )
     private List<Member> members;
 
 
 
-    // 일정 생성
     @Builder
-    public Schedule(CreateRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.username = requestDto.getUsername();
-        this.password = requestDto.getPassword();
-        this.content = requestDto.getContent();
+    public Schedule(String title, String content, String password, List<Member> members) {
+        this.title = title;
+        this.password = password;
+        this.content = content;
+        this.members = members;
     }
 
-    @Builder
     public void update(UpdateRequestDto requestDto) {
         this.title = requestDto.getTitle();
-        this.username = requestDto.getUsername();
         this.content = requestDto.getContent();
     }
 }

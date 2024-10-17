@@ -26,7 +26,7 @@ public class MemberService {
     public List<MemberResponseDto> getAllMembers() {
         List<Member> members = memberRepository.findAll();
         return members.stream()
-                .map(member -> new MemberResponseDto(member.getId(), member.getName(), member.getEmail()))
+                .map(member -> new MemberResponseDto(member.getId(), member.getMemberId(), member.getEmail()))
                 .toList();
     }
 
@@ -34,7 +34,7 @@ public class MemberService {
     public MemberResponseDto getMember(Long id) {
         Optional<Member> member = memberRepository.findById(id);
         if (member.isPresent()) {
-            return new MemberResponseDto(member.get().getId(), member.get().getName(), member.get().getEmail());
+            return new MemberResponseDto(member.get().getId(), member.get().getMemberId(), member.get().getEmail());
         } else {
             throw new RuntimeException("해당 사용자를 찾을 수 없습니다.");
         }
@@ -47,13 +47,13 @@ public class MemberService {
             Member existingMember = memberOptional.get();
 
             // updateMember 메서드를 사용하여 값을 변경
-            existingMember.updateMember(memberRequestDto.getName(), memberRequestDto.getEmail());
+            existingMember.updateMember(memberRequestDto.getMemberId(), memberRequestDto.getEmail());
 
             // 변경된 엔티티를 저장
             existingMember = memberRepository.save(existingMember);
 
             // 업데이트된 정보 반환
-            return new MemberResponseDto(existingMember.getId(), existingMember.getName(), existingMember.getEmail());
+            return new MemberResponseDto(existingMember.getId(), existingMember.getMemberId(), existingMember.getEmail());
         } else {
             throw new RuntimeException("해당 사용자를 찾을 수 없습니다.");
         }

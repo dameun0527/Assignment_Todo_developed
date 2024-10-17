@@ -70,7 +70,7 @@
 //
 //        assertThat(schedules.size()).isEqualTo(1);
 //        assertThat(schedules.get(0).getTitle()).isEqualTo(title);
-//        assertThat(schedules.get(0).getUsername()).isEqualTo(username);
+//        assertThat(schedules.get(0).getCreator()).isEqualTo(username);
 //        assertThat(schedules.get(0).getContent()).isEqualTo(content);
 //    }
 //

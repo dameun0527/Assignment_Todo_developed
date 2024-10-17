@@ -1,6 +1,5 @@
 package com.sparta.assignment_todo_developed.dto.schedule;
 
-import com.sparta.assignment_todo_developed.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +10,8 @@ import lombok.NoArgsConstructor;
 public final class CreateRequestDto extends ScheduleDto {
     private String password;
 
-    public CreateRequestDto(String title, String username, String password, String content) {
-        super(title, username, content);
+    public CreateRequestDto(String title, Long memberId, String password, String content) {
+        super(title, memberId, content);
         this.password = password;
     }
 }

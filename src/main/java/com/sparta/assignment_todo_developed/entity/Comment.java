@@ -18,20 +18,21 @@ public class Comment extends BaseTime {
     @Column(name = "comment_id", updatable = false)
     private Long commentId;
 
-    // 댓글 작성자
-    @Column(name = "author", nullable = false)
-    private String author;
-
     @Column(name = "comment", columnDefinition = "TEXT", nullable = false)
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
+
     @Builder
-    public Comment(Schedule schedule, String author, String comment) {
+    public Comment(Schedule schedule, Member member, String comment) {
         this.schedule = schedule;
-        this.author = author;
+        this.member = member;
         this.comment = comment;
     }
 

@@ -26,7 +26,7 @@ public class MemberController {
     @PostMapping
     public ResponseEntity<MemberResponseDto> registerMember(@RequestBody MemberRequestDto memberRequestDto) {
         Member member = memberService.save(memberRequestDto);
-        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), member.getName(), member.getEmail());
+        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), member.getMemberId(), member.getEmail());
         return new ResponseEntity<>(memberResponseDto, HttpStatus.CREATED);
     }
 

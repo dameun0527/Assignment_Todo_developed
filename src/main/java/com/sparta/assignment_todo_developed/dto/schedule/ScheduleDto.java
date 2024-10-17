@@ -11,6 +11,6 @@ public abstract class ScheduleDto {
 
     // 공통 필드
     protected String title;
-    protected String username;
+    protected Long memberId;
     protected String content;
 }

@@ -15,9 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/schedule")
@@ -30,7 +27,8 @@ public class ScheduleController {
     @PostMapping()
     public ResponseEntity<ResponseDto> createSchedule(@RequestBody CreateRequestDto createRequestDto) {
         Schedule schedule = scheduleService.save(createRequestDto);
-        ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), schedule.getUsername(), schedule.getContent());
+        Long memberId = schedule.getMembers().get(0).getId();
+        ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), memberId, schedule.getContent());
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
@@ -53,11 +51,13 @@ public class ScheduleController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc("updatedAt")));
         return scheduleRepository.findAll(pageable);
     }
+
     // 선택 일정 조회
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> findSchedule(@PathVariable Long id) {
         Schedule schedule = scheduleService.findById(id);
-        ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), schedule.getUsername(), schedule.getContent());
+        Long memberId = schedule.getMembers().get(0).getId();
+        ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), memberId, schedule.getContent());
         return ResponseEntity.ok(responseDto);
     }
 
@@ -65,7 +65,8 @@ public class ScheduleController {
     @PutMapping("/{id}")
     public ResponseEntity<ResponseDto> updateSchedule(@PathVariable Long id, @RequestBody UpdateRequestDto updateRequestDto) {
         Schedule schedule = scheduleService.update(id, updateRequestDto);
-        ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), schedule.getUsername(), schedule.getContent());
+        Long memberId = schedule.getMembers().get(0).getId();
+        ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), memberId, schedule.getContent());
         return ResponseEntity.ok(responseDto);
     }
 
@@ -76,4 +77,3 @@ public class ScheduleController {
         return ResponseEntity.noContent().build();
     }
 }
-

@@ -6,29 +6,35 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Table(name = "Member")
 public class Member extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    @Column(name = "member_id", unique = true, nullable = false)
+    private Long memberId;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
-    private Set<Schedule> schedules;
+    private List<Schedule> schedules;
 
     public Member(MemberRequestDto memberRequestDto) {
-        this.name = memberRequestDto.getName();
+        this.memberId = memberRequestDto.getMemberId();
         this.email = memberRequestDto.getEmail();
     }
 
-    public void updateMember(String name, String email) {
-        this.name = name;
+    public void updateMember(Long memberId, String email) {
+        this.memberId = memberId;
         this.email = email;
     }
 }

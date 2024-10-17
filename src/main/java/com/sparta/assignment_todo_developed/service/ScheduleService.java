@@ -2,7 +2,9 @@ package com.sparta.assignment_todo_developed.service;
 
 import com.sparta.assignment_todo_developed.dto.schedule.CreateRequestDto;
 import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
+import com.sparta.assignment_todo_developed.entity.Member;
 import com.sparta.assignment_todo_developed.entity.Schedule;
+import com.sparta.assignment_todo_developed.repository.MemberRepository;
 import com.sparta.assignment_todo_developed.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,12 +16,23 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
+
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
+    private final MemberRepository memberRepository;
 
     // 일정 등록
     public Schedule save(CreateRequestDto createRequestDto) {
-        Schedule schedule = new Schedule(createRequestDto);
+        Member member = memberRepository.findById(createRequestDto.getMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다."));
+
+        Schedule schedule = Schedule.builder()
+                .title(createRequestDto.getTitle())
+                .password(createRequestDto.getPassword())
+                .content(createRequestDto.getContent())
+                .members(List.of(member))
+                .build();
+
         return scheduleRepository.save(schedule);
     }
 
@@ -58,4 +71,3 @@ public class ScheduleService {
         System.out.println("삭제되었습니다.");
     }
 }
-

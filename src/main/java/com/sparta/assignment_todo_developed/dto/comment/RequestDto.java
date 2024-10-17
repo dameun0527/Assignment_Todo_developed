@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class RequestDto {
     private Long scheduleId;
-    private String author;
+    private Long memberId;
     private String comment;
 
 }
