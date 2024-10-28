@@ -17,7 +17,7 @@ public class ResponseDto {
         this.commentId = comment.getCommentId();
         this.comment = comment.getComment();
         this.scheduleId = comment.getSchedule().getId();
-        this.memberId = comment.getMember().getMemberId();
+        this.memberId = comment.getMember().getId();
 
     }
 }

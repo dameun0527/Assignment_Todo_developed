@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 
-@AllArgsConstructor
-public class MemberRequestDto {
-    private String name;
+public class MemberRequestDto { // 회원가입 요청, 사용자 조회, 사용자 탈퇴
     private String email;
+    private String password;
+    private String name;
 }

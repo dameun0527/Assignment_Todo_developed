@@ -1,17 +1,20 @@
 package com.sparta.assignment_todo_developed.dto.member;
 
+import com.sparta.assignment_todo_developed.entity.Member;
 import lombok.Getter;
 
 @Getter
 
 public class MemberResponseDto {
-    private Long memberId;
-    private String name;
-    private String email;
+    private final Long id;
+    private final String email;
+    private final String username;
 
-    public MemberResponseDto(Long memberId, String name, String email) {
-        this.memberId = memberId;
-        this.name = name;
-        this.email = email;
+    public MemberResponseDto(Member member) {
+        this.id = member.getId();
+        this.email = member.getEmail();
+        this.username = member.getUsername();
+
+
     }
 }

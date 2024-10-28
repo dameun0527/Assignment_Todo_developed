@@ -3,9 +3,9 @@ package com.sparta.assignment_todo_developed.entity;
 import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -13,30 +13,34 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
+@Builder
 @Table(name = "Member")
 public class Member extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id", unique = true, nullable = false)
-    private Long memberId;
-
-    @Column(nullable = false)
-    private String name;
+    private Long id;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String username;
 
     @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
     private List<Schedule> schedules;
 
     public Member(MemberRequestDto memberRequestDto) {
-        this.memberId = memberRequestDto.getMemberId();
-        this.email = memberRequestDto.getEmail();
+        this.email = email;
+        this.password = password;
+        this.username = username;
     }
 
-    public void updateMember(Long memberId, String email) {
-        this.memberId = memberId;
-        this.email = email;
+    public void updateMemberInfo(String password, String username) { // 비밀번호 + 사용자 이름(닉네임) 수정 기능
+        this.password = password;
+        this.username = username;
     }
 }
