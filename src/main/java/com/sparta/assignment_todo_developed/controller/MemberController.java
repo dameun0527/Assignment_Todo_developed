@@ -25,9 +25,8 @@ public class MemberController {
     // 사용자 등록
     @PostMapping
     public ResponseEntity<MemberResponseDto> registerMember(@RequestBody MemberRequestDto memberRequestDto) {
-        Member member = memberService.save(memberRequestDto);
-        MemberResponseDto memberResponseDto = new MemberResponseDto(member.getId(), member.getMemberId(), member.getEmail());
-        return new ResponseEntity<>(memberResponseDto, HttpStatus.CREATED);
+        MemberResponseDto memberResponseDto = memberService.createMember(memberRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberResponseDto);
     }
 
     // 전체 사용자 목록 조회
@@ -38,10 +37,10 @@ public class MemberController {
     }
 
     // 특정 사용자 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long id) {
-        MemberResponseDto memberResponseDto = memberService.getMember(id);
-        return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
+    @GetMapping("/{name}")
+    public ResponseEntity<MemberResponseDto> getMember(@PathVariable String name) {
+        MemberResponseDto memberResponseDto = memberService.findMemberByName(name);
+        return ResponseEntity.ok(memberResponseDto);
     }
 
     // 사용자 정보 수정

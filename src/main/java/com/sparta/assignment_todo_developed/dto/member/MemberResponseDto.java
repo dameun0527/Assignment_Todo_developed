@@ -5,13 +5,13 @@ import lombok.Getter;
 @Getter
 
 public class MemberResponseDto {
-    private Long id;
     private Long memberId;
+    private String name;
     private String email;
 
-    public MemberResponseDto(Long id, Long memberId, String email) {
-        this.id = id;
+    public MemberResponseDto(Long memberId, String name, String email) {
         this.memberId = memberId;
+        this.name = name;
         this.email = email;
     }
 }

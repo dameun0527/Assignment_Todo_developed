@@ -49,16 +49,16 @@ public class CommentService {
     // 댓글 조회
     @Transactional
     public List<ResponseDto> getCommentBySchedule(Long scheduleId) {
-        return commentRepository.findByScheduleId(scheduleId).stream()
+        return commentRepository.findById(scheduleId).stream()
                 .map(comment -> new ResponseDto(comment))
                 .collect(Collectors.toList());
     }
 
     // 댓글 수정 (내용만 가능)
     @Transactional
-    public ResponseDto updateComment(Long scheduleId, Long commentId, RequestDto requestDto) {
-        // commentId랑 scheduleId로 댓글 찾기
-        Comment comment = commentRepository.findByCommentIdAndScheduleId(commentId, scheduleId)
+    public ResponseDto updateComment(Long commentId, RequestDto requestDto) {
+        // commentId로 댓글 찾기
+        Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 댓글이 존재하지 않습니다."));
 
         // 댓글 내용 수정
@@ -71,8 +71,8 @@ public class CommentService {
     // 댓글 삭제
     @Transactional
     public void deleteComment(Long commentId, Long scheduleId) {
-        // commentId랑 scheduleId로 댓글 찾기
-        Comment comment = commentRepository.findByCommentIdAndScheduleId(commentId, scheduleId)
+        // commentId로 댓글 찾기
+        Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다."));
 
         // 댓글 삭제

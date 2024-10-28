@@ -33,14 +33,14 @@ public class CommentController {
 
     // 댓글 수정 (내용 수정만 가능)
     @PutMapping("/{commentId}")
-    public ResponseEntity<ResponseDto> updateComment(@PathVariable Long scheduleId,@PathVariable Long commentId, @RequestBody RequestDto requestDto) {
-        return ResponseEntity.ok(commentService.updateComment(scheduleId,commentId, requestDto));
+    public ResponseEntity<ResponseDto> updateComment(@PathVariable Long commentId, @RequestBody RequestDto requestDto) {
+        return ResponseEntity.ok(commentService.updateComment(commentId, requestDto));
     }
 
     // 댓글 삭제
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId) {
         commentService.deleteComment(scheduleId, commentId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

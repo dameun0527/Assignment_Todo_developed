@@ -27,7 +27,7 @@ public class ScheduleController {
     @PostMapping()
     public ResponseEntity<ResponseDto> createSchedule(@RequestBody CreateRequestDto createRequestDto) {
         Schedule schedule = scheduleService.save(createRequestDto);
-        Long memberId = schedule.getMembers().get(0).getId();
+        Long memberId = schedule.getMembers().get(0).getMemberId();
         ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), memberId, schedule.getContent());
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
@@ -56,7 +56,7 @@ public class ScheduleController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> findSchedule(@PathVariable Long id) {
         Schedule schedule = scheduleService.findById(id);
-        Long memberId = schedule.getMembers().get(0).getId();
+        Long memberId = schedule.getMembers().get(0).getMemberId();
         ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), memberId, schedule.getContent());
         return ResponseEntity.ok(responseDto);
     }
@@ -65,7 +65,7 @@ public class ScheduleController {
     @PutMapping("/{id}")
     public ResponseEntity<ResponseDto> updateSchedule(@PathVariable Long id, @RequestBody UpdateRequestDto updateRequestDto) {
         Schedule schedule = scheduleService.update(id, updateRequestDto);
-        Long memberId = schedule.getMembers().get(0).getId();
+        Long memberId = schedule.getMembers().get(0).getMemberId();
         ResponseDto responseDto = new ResponseDto(schedule.getId(), schedule.getTitle(), memberId, schedule.getContent());
         return ResponseEntity.ok(responseDto);
     }

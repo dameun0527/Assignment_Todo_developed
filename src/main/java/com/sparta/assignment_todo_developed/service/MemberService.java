@@ -4,7 +4,9 @@ import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
 import com.sparta.assignment_todo_developed.dto.member.MemberResponseDto;
 import com.sparta.assignment_todo_developed.entity.Member;
 import com.sparta.assignment_todo_developed.repository.MemberRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,13 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // 사용자 등록
-    public Member save(MemberRequestDto memberRequestDto) {
-        Member member = new Member(memberRequestDto);
-        return memberRepository.save(member);
+    public MemberResponseDto createMember(MemberRequestDto memberRequestDto) {
+        Member member = new Member();
+        member.setName(memberRequestDto.getName());
+        member.setEmail(memberRequestDto.getEmail());
+
+        Member savedMember = memberRepository.save(member);
+        return new MemberResponseDto(savedMember.getMemberId(), savedMember.getName(), savedMember.getEmail());
     }
 
 
@@ -26,37 +32,22 @@ public class MemberService {
     public List<MemberResponseDto> getAllMembers() {
         List<Member> members = memberRepository.findAll();
         return members.stream()
-                .map(member -> new MemberResponseDto(member.getId(), member.getMemberId(), member.getEmail()))
+                .map(member -> new MemberResponseDto(member.getMemberId(), member.getName(),member.getEmail()))
                 .toList();
     }
 
     // 특정 사용자 조회
-    public MemberResponseDto getMember(Long id) {
-        Optional<Member> member = memberRepository.findById(id);
-        if (member.isPresent()) {
-            return new MemberResponseDto(member.get().getId(), member.get().getMemberId(), member.get().getEmail());
-        } else {
-            throw new RuntimeException("해당 사용자를 찾을 수 없습니다.");
+    public MemberResponseDto findMemberByName(String name) {
+        Member member = memberRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("해당 사용자를 찾을 수 없습니다.")));
+        return new MemberResponseDto(member.getMemberId(), member.getName(), member.getEmail());
         }
     }
 
     // 사용자 정보 수정
-    public MemberResponseDto updateMember(Long id, MemberRequestDto memberRequestDto) {
-        Optional<Member> memberOptional = memberRepository.findById(id);
-        if (memberOptional.isPresent()) {
-            Member existingMember = memberOptional.get();
-
-            // updateMember 메서드를 사용하여 값을 변경
-            existingMember.updateMember(memberRequestDto.getMemberId(), memberRequestDto.getEmail());
-
-            // 변경된 엔티티를 저장
-            existingMember = memberRepository.save(existingMember);
-
-            // 업데이트된 정보 반환
-            return new MemberResponseDto(existingMember.getId(), existingMember.getMemberId(), existingMember.getEmail());
-        } else {
-            throw new RuntimeException("해당 사용자를 찾을 수 없습니다.");
-        }
+    public MemberResponseDto updateMember(Long memberId, String name) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow (() -> new MemberNotFound
     }
 
     // 사용자 탈퇴 (삭제)
