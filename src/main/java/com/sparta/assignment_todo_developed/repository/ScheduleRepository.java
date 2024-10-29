@@ -10,4 +10,7 @@ import java.util.List;
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     List<Schedule> findAllByOrderByCreatedAtDesc();
 
+    default Schedule findScheduleById(Long id) {
+        return findById(id).orElseThrow(()-> new RuntimeException("존재하지 않는 일정입니다."));
+    }
 }

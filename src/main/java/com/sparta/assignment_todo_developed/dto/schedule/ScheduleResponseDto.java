@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ScheduleResponseDto {
-    private Long scheduleId;
+    private Long id;
     private String title;
     private String content;
     private Long memberId;
@@ -20,7 +20,7 @@ public class ScheduleResponseDto {
 
     public static ScheduleResponseDto from(Schedule schedule) {
         return ScheduleResponseDto.builder()
-                .scheduleId(schedule.getScheduleId())
+                .id(schedule.getId())
                 .title(schedule.getTitle())
                 .content(schedule.getContent())
                 .memberId(schedule.getMember().getId())

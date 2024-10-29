@@ -1,9 +1,8 @@
 package com.sparta.assignment_todo_developed.service;
 
-import com.sparta.assignment_todo_developed.dto.comment.RequestDto;
-import com.sparta.assignment_todo_developed.dto.comment.ResponseDto;
+import com.sparta.assignment_todo_developed.dto.comment.CommentRequestDto;
+import com.sparta.assignment_todo_developed.dto.comment.CommentResponseDto;
 import com.sparta.assignment_todo_developed.entity.Comment;
-import com.sparta.assignment_todo_developed.entity.Member;
 import com.sparta.assignment_todo_developed.entity.Schedule;
 import com.sparta.assignment_todo_developed.repository.CommentRepository;
 import com.sparta.assignment_todo_developed.repository.MemberRepository;
@@ -25,52 +24,51 @@ public class CommentService {
 
     // 댓글 생성
     @Transactional
-    public ResponseDto createComment(RequestDto requestDto) {
+    public CommentResponseDto createComment(CommentRequestDto requestDto) {
         // scheduleId로 해당 일정 찾기
         Schedule schedule = scheduleRepository.findById(requestDto.getScheduleId())
                 .orElseThrow(() -> new IllegalArgumentException(requestDto.getScheduleId() + ": 존재하지 않는 일정입니다."));
 
-        // memberId로 해당 멤버 찾기
-        Member member = memberRepository.findById(requestDto.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException(requestDto.getMemberId() + ": 존재하지 않는 사용자입니다."));
+//        // memberId로 해당 멤버 찾기
+//        Member member = memberRepository.findById(requestDto.getMemberId())
+//                .orElseThrow(() -> new IllegalArgumentException(requestDto.getMemberId() + ": 존재하지 않는 사용자입니다."));
 
-        // 댓글 생성
         Comment comment = Comment.builder()
+                .content(requestDto.getContent())
+                .memberId(requestDto.getMemberId())
+                .author(requestDto.getAuthor())
                 .schedule(schedule)
-                .member(member)
-                .comment(requestDto.getComment())
                 .build();
 
-        // 댓글 저장
-        Comment savedComment = commentRepository.save(comment);
-        return new ResponseDto(savedComment);
+        comment = commentRepository.save(comment);
+        return new CommentResponseDto(comment);
+
     }
 
     // 댓글 조회
     @Transactional
-    public List<ResponseDto> getCommentBySchedule(Long scheduleId) {
-        return commentRepository.findById(scheduleId).stream()
-                .map(comment -> new ResponseDto(comment))
-                .collect(Collectors.toList());
+    public List<CommentResponseDto> getComment(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findScheduleById(scheduleId);
+        return schedule.getComments().stream()
+                .map(CommentResponseDto::new)
+                .toList();
     }
 
     // 댓글 수정 (내용만 가능)
     @Transactional
-    public ResponseDto updateComment(Long commentId, RequestDto requestDto) {
+    public CommentResponseDto updateComment(Long commentId, CommentRequestDto requestDto) {
         // commentId로 댓글 찾기
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 댓글이 존재하지 않습니다."));
-
         // 댓글 내용 수정
-        comment.updateComment(requestDto.getComment());
-
+        comment.updateComment(requestDto.getContent());
         // 수정된 댓글 반환
-        return new ResponseDto(comment);
+        return new CommentResponseDto(comment);
     }
 
     // 댓글 삭제
     @Transactional
-    public void deleteComment(Long commentId, Long scheduleId) {
+    public void deleteComment(Long commentId) {
         // commentId로 댓글 찾기
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다."));
