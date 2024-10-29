@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Builder
 @Table(name = "Member")
-public class Member extends BaseTime {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id", unique = true, nullable = false)
@@ -27,20 +27,20 @@ public class Member extends BaseTime {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
-    private List<Schedule> schedules;
+//    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
+//    private List<Schedule> schedules;
 
     public Member(MemberRequestDto memberRequestDto) {
-        this.email = email;
-        this.password = password;
-        this.username = username;
+        this.email = memberRequestDto.getEmail();
+        this.password = memberRequestDto.getPassword();
+        this.username = memberRequestDto.getUsername();
     }
 
-    public void updateMemberInfo(String password, String username) { // 비밀번호 + 사용자 이름(닉네임) 수정 기능
-        this.password = password;
+    public void updateMemberInfo(String username, String password) { // 비밀번호 + 사용자 이름(닉네임) 수정 기능
         this.username = username;
+        this.password = password;
     }
 }

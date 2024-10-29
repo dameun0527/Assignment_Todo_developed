@@ -1,7 +1,9 @@
 package com.sparta.assignment_todo_developed.controller;
 
+import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
 import com.sparta.assignment_todo_developed.dto.member.MemberResponseDto;
 import com.sparta.assignment_todo_developed.dto.member.UpdateRequestDto;
+import com.sparta.assignment_todo_developed.entity.Member;
 import com.sparta.assignment_todo_developed.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,11 +18,18 @@ public class MemberController {
     private final MemberService memberService;
 
 
-//    // 사용자 등록
-//    @PostMapping
-//    public ResponseEntity<MemberResponseDto> registerMember(@RequestBody MemberRequestDto memberRequestDto) {
-//        MemberResponseDto memberResponseDto = memberService.createMember(memberRequestDto);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(memberResponseDto);
+    // 사용자 등록
+    @PostMapping
+    public ResponseEntity<MemberResponseDto> registerMember(@RequestBody MemberRequestDto requestDto) {
+        MemberResponseDto memberResponseDto = memberService.createMembers(requestDto);
+        return new ResponseEntity<>(memberResponseDto, HttpStatus.CREATED);
+    }
+
+//    @PostMapping()
+//    public ResponseEntity<SchedulesResponseDto> createSchedules(@RequestBody SchedulesRequestDto schedulesRequestDto) {
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .body(schedulesService.createSchedules(schedulesRequestDto));
 //    }
 
 //    // 전체 사용자 목록 조회

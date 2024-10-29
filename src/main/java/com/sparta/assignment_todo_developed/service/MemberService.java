@@ -1,6 +1,7 @@
 package com.sparta.assignment_todo_developed.service;
 
 import com.sparta.assignment_todo_developed.auth.JwtTokenProvider;
+import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
 import com.sparta.assignment_todo_developed.dto.member.MemberResponseDto;
 import com.sparta.assignment_todo_developed.dto.member.UpdateRequestDto;
 import com.sparta.assignment_todo_developed.entity.Member;
@@ -8,19 +9,28 @@ import com.sparta.assignment_todo_developed.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
+import org.springframework.web.servlet.HandlerMapping;
 
 @RequiredArgsConstructor
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final HandlerMapping resourceHandlerMapping;
 
 
     // 사용자 등록: 회원 가입 기능 구현 후
+    public MemberResponseDto createMembers(MemberRequestDto requestDto) {
+        Member member = new Member(requestDto);
+        Member savedMember = memberRepository.save(member);
+        return new MemberResponseDto(savedMember);
+    }
 
 
+//    public SchedulesResponseDto createSchedules(SchedulesRequestDto schedulesRequestDto) {
+//        Schedules schedules = schedulesRepository.save(Schedules.from(schedulesRequestDto));
+//        return schedules.to();
+//    }
 
     // 특정 사용자 조회
     public MemberResponseDto getMember(Long id) {
@@ -35,7 +45,7 @@ public class MemberService {
     public MemberResponseDto updateMember(Long memberId, UpdateRequestDto requestDto) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow (() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
-        member.updateMemberInfo(requestDto.getUsername(),requestDto.getPassword());
+        member.updateMemberInfo(requestDto.getUsername(), requestDto.getPassword());
         return new MemberResponseDto(member);
     }
 
