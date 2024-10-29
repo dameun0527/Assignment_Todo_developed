@@ -30,8 +30,8 @@ public class Member {
     @Column(name = "username", nullable = false)
     private String username;
 
-//    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
-//    private List<Schedule> schedules;
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Schedule> schedules;
 
     public Member(MemberRequestDto memberRequestDto) {
         this.email = memberRequestDto.getEmail();
