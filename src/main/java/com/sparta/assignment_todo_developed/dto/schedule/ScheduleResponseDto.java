@@ -3,7 +3,6 @@ package com.sparta.assignment_todo_developed.dto.schedule;
 import com.sparta.assignment_todo_developed.entity.Schedule;
 import lombok.Builder;
 import lombok.Getter;
-import java.util.List;
 
 @Getter
 @Builder
@@ -12,6 +11,11 @@ public class ScheduleResponseDto {
     private String title;
     private String content;
     private Long memberId;
+    private String createdAt;
+    private String updatedAt;
+
+
+
 
 
     public static ScheduleResponseDto from(Schedule schedule) {
@@ -20,6 +24,8 @@ public class ScheduleResponseDto {
                 .title(schedule.getTitle())
                 .content(schedule.getContent())
                 .memberId(schedule.getMember().getId())
+                .createdAt(schedule.getFormattedCreatedAt())
+                .updatedAt(schedule.getFormattedUpdatedAt())
                 .build();
     }
 

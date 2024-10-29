@@ -39,8 +39,7 @@ public class Schedule extends BaseTime {
         this.member = member;
     }
 
-    public void update(UpdateRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.content = requestDto.getContent();
+    public void updateScheduleInfo(String content) {
+        this.content = content;
     }
 }

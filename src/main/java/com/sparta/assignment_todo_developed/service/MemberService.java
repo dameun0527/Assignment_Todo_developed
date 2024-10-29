@@ -27,11 +27,6 @@ public class MemberService {
     }
 
 
-//    public SchedulesResponseDto createSchedules(SchedulesRequestDto schedulesRequestDto) {
-//        Schedules schedules = schedulesRepository.save(Schedules.from(schedulesRequestDto));
-//        return schedules.to();
-//    }
-
     // 특정 사용자 조회
     public MemberResponseDto getMember(Long id) {
         Member member = memberRepository.findById(id)

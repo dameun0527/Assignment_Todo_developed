@@ -7,7 +7,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @MappedSuperclass
@@ -15,8 +16,18 @@ import java.sql.Timestamp;
 public abstract class BaseTime {
 
     @CreatedDate
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
+
+    public String getFormattedCreatedAt() {
+        return createdAt != null ? createdAt.format(formatter) : null;
+    }
+
+    public String getFormattedUpdatedAt() {
+        return updatedAt != null ? updatedAt.format(formatter) : null;
+    }
 }

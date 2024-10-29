@@ -50,7 +50,7 @@ public class MemberController {
     @PutMapping("/{id}")
     public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long id, @RequestBody UpdateRequestDto requestDto) {
         MemberResponseDto responseDto = memberService.updateMember(id, requestDto);
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        return ResponseEntity.ok(responseDto);
     }
 
     // 사용자 탈퇴 (삭제)
