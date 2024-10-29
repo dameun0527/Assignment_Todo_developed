@@ -5,12 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public final class UpdateRequestDto extends ScheduleDto {
-
-    private String password;
-
-    public UpdateRequestDto(String title, Long memberId, String password, String content) {
-        super(title,memberId,content);
-        this.password = password;
-    }
+public class UpdateRequestDto {
+    private String title;
+    private String content;
 }

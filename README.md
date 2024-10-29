@@ -90,7 +90,7 @@
 package com.sparta.assignment_todo_developed.entity;
 
 import com.sparta.assignment_todo_developed.dto.schedule.CreateRequestDto;
-import com.sparta.assignment_todo_developed.dto.schedule.ScheduleDto;
+import com.sparta.assignment_todo_developed.dto.schedule.ScheduleResponseDto;
 import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

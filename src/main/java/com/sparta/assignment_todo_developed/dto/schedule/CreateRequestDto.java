@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-public final class CreateRequestDto extends ScheduleDto {
-    private String password;
+import java.util.List;
 
-    public CreateRequestDto(String title, Long memberId, String password, String content) {
-        super(title, memberId, content);
-        this.password = password;
-    }
+@Getter
+@NoArgsConstructor
+
+public class CreateRequestDto {
+    private String title;
+    private String content;
+    private Long memberId;
+
 }

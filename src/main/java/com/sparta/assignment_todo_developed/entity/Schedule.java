@@ -1,7 +1,5 @@
 package com.sparta.assignment_todo_developed.entity;
 
-import com.sparta.assignment_todo_developed.dto.schedule.CreateRequestDto;
-import com.sparta.assignment_todo_developed.dto.schedule.ScheduleDto;
 import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -21,7 +19,7 @@ public class Schedule extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long scheduleId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -29,28 +27,16 @@ public class Schedule extends BaseTime {
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE)
-    private List<Comment> comments;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "member_schedule",
-            joinColumns = @JoinColumn(name = "schedule_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id")
-    )
-    private List<Member> members;
-
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
 
     @Builder
-    public Schedule(String title, String content, String password, List<Member> members) {
+    public Schedule(String title, String content, String password, Member member) {
         this.title = title;
-        this.password = password;
         this.content = content;
-        this.members = members;
+        this.member = member;
     }
 
     public void update(UpdateRequestDto requestDto) {
