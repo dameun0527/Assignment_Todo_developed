@@ -1,10 +1,9 @@
 package com.sparta.assignment_todo_developed.controller;
 
-import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
-import com.sparta.assignment_todo_developed.dto.member.MemberResponseDto;
-import com.sparta.assignment_todo_developed.dto.member.UpdateRequestDto;
-import com.sparta.assignment_todo_developed.entity.Member;
-import com.sparta.assignment_todo_developed.service.MemberService;
+import com.sparta.assignment_todo_developed.model.dto.member.MemberRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.member.MemberResponseDto;
+import com.sparta.assignment_todo_developed.model.dto.member.UpdateRequestDto;
+import com.sparta.assignment_todo_developed.service.business.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

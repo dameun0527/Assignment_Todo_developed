@@ -1,8 +1,8 @@
 package com.sparta.assignment_todo_developed.controller;
 
-import com.sparta.assignment_todo_developed.dto.comment.CommentRequestDto;
-import com.sparta.assignment_todo_developed.dto.comment.CommentResponseDto;
-import com.sparta.assignment_todo_developed.service.CommentService;
+import com.sparta.assignment_todo_developed.model.dto.comment.CommentRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.comment.CommentResponseDto;
+import com.sparta.assignment_todo_developed.service.business.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

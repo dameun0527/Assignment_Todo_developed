@@ -1,22 +1,17 @@
 package com.sparta.assignment_todo_developed.controller;
 
-import com.sparta.assignment_todo_developed.dto.schedule.CreateRequestDto;
-import com.sparta.assignment_todo_developed.dto.schedule.ScheduleResponseDto;
-import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
-import com.sparta.assignment_todo_developed.entity.Schedule;
+import com.sparta.assignment_todo_developed.model.dto.schedule.CreateRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.schedule.ScheduleResponseDto;
+import com.sparta.assignment_todo_developed.model.dto.schedule.UpdateRequestDto;
+import com.sparta.assignment_todo_developed.model.entity.Schedule;
 import com.sparta.assignment_todo_developed.repository.ScheduleRepository;
-import com.sparta.assignment_todo_developed.service.ScheduleService;
+import com.sparta.assignment_todo_developed.service.business.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
