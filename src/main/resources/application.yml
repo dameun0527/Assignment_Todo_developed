@@ -14,3 +14,8 @@ spring:
     password: '880416'
   application:
     name: Assignment_Todo_developed
+
+jwt:
+  issuer: jisuryu0527@gmail.com
+  secret-key: SECRET_KEY
+  header: Authorization
