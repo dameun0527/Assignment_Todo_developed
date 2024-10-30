@@ -1,6 +1,6 @@
 package com.sparta.assignment_todo_developed.repository;
 
-import com.sparta.assignment_todo_developed.entity.RefreshToken;
+import com.sparta.assignment_todo_developed.model.entity.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.sparta.assignment_todo_developed.auth.token;
 
-import com.sparta.assignment_todo_developed.entity.Member;
+import com.sparta.assignment_todo_developed.model.entity.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -22,9 +22,8 @@ public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
 
-    public String generateToken(Member member) {
+    public String generateToken(Member member, Duration expiredAt) {
         Date now = new Date();
-        Duration expiredAt = Duration.ofHours(1);
         return makeToken(new Date(now.getTime() + expiredAt.toMillis()), member);
     }
 
