@@ -1,9 +1,9 @@
-package com.sparta.assignment_todo_developed.service;
+package com.sparta.assignment_todo_developed.service.business;
 
-import com.sparta.assignment_todo_developed.dto.comment.CommentRequestDto;
-import com.sparta.assignment_todo_developed.dto.comment.CommentResponseDto;
-import com.sparta.assignment_todo_developed.entity.Comment;
-import com.sparta.assignment_todo_developed.entity.Schedule;
+import com.sparta.assignment_todo_developed.model.dto.comment.CommentRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.comment.CommentResponseDto;
+import com.sparta.assignment_todo_developed.model.entity.Comment;
+import com.sparta.assignment_todo_developed.model.entity.Schedule;
 import com.sparta.assignment_todo_developed.repository.CommentRepository;
 import com.sparta.assignment_todo_developed.repository.MemberRepository;
 import com.sparta.assignment_todo_developed.repository.ScheduleRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service

@@ -1,10 +1,10 @@
-package com.sparta.assignment_todo_developed.service;
+package com.sparta.assignment_todo_developed.service.business;
 
-import com.sparta.assignment_todo_developed.dto.schedule.CreateRequestDto;
-import com.sparta.assignment_todo_developed.dto.schedule.ScheduleResponseDto;
-import com.sparta.assignment_todo_developed.dto.schedule.UpdateRequestDto;
-import com.sparta.assignment_todo_developed.entity.Member;
-import com.sparta.assignment_todo_developed.entity.Schedule;
+import com.sparta.assignment_todo_developed.model.dto.schedule.CreateRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.schedule.ScheduleResponseDto;
+import com.sparta.assignment_todo_developed.model.dto.schedule.UpdateRequestDto;
+import com.sparta.assignment_todo_developed.model.entity.Member;
+import com.sparta.assignment_todo_developed.model.entity.Schedule;
 import com.sparta.assignment_todo_developed.repository.MemberRepository;
 import com.sparta.assignment_todo_developed.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;

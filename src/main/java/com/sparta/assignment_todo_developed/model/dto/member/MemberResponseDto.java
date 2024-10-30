@@ -1,6 +1,6 @@
-package com.sparta.assignment_todo_developed.dto.member;
+package com.sparta.assignment_todo_developed.model.dto.member;
 
-import com.sparta.assignment_todo_developed.entity.Member;
+import com.sparta.assignment_todo_developed.model.entity.Member;
 import lombok.Getter;
 
 @Getter

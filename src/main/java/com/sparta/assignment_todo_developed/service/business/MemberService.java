@@ -1,10 +1,10 @@
-package com.sparta.assignment_todo_developed.service;
+package com.sparta.assignment_todo_developed.service.business;
 
 import com.sparta.assignment_todo_developed.auth.token.JwtTokenProvider;
-import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
-import com.sparta.assignment_todo_developed.dto.member.MemberResponseDto;
-import com.sparta.assignment_todo_developed.dto.member.UpdateRequestDto;
-import com.sparta.assignment_todo_developed.entity.Member;
+import com.sparta.assignment_todo_developed.model.dto.member.MemberRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.member.MemberResponseDto;
+import com.sparta.assignment_todo_developed.model.dto.member.UpdateRequestDto;
+import com.sparta.assignment_todo_developed.model.entity.Member;
 import com.sparta.assignment_todo_developed.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

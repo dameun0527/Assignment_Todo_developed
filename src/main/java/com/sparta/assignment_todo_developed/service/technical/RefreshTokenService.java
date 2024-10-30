@@ -1,6 +1,6 @@
-package com.sparta.assignment_todo_developed.service;
+package com.sparta.assignment_todo_developed.service.technical;
 
-import com.sparta.assignment_todo_developed.entity.RefreshToken;
+import com.sparta.assignment_todo_developed.model.entity.RefreshToken;
 import com.sparta.assignment_todo_developed.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

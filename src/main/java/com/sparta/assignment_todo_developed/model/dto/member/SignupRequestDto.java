@@ -1,4 +1,4 @@
-package com.sparta.assignment_todo_developed.dto.member;
+package com.sparta.assignment_todo_developed.model.dto.member;
 
 import lombok.Getter;
 

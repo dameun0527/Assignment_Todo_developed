@@ -1,4 +1,4 @@
-package com.sparta.assignment_todo_developed.entity;
+package com.sparta.assignment_todo_developed.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

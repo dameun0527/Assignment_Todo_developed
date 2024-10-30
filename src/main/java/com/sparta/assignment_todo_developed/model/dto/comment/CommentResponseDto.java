@@ -1,7 +1,6 @@
-package com.sparta.assignment_todo_developed.dto.comment;
+package com.sparta.assignment_todo_developed.model.dto.comment;
 
-import com.sparta.assignment_todo_developed.entity.Comment;
-import lombok.Builder;
+import com.sparta.assignment_todo_developed.model.entity.Comment;
 import lombok.Getter;
 
 

@@ -1,6 +1,6 @@
-package com.sparta.assignment_todo_developed.entity;
+package com.sparta.assignment_todo_developed.model.entity;
 
-import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
+import com.sparta.assignment_todo_developed.model.dto.member.MemberRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

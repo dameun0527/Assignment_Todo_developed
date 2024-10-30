@@ -1,4 +1,4 @@
-package com.sparta.assignment_todo_developed.dto.schedule;
+package com.sparta.assignment_todo_developed.model.dto.schedule;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
