@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        ejb:
+          interceptor: org.springframework.data.jpa.domain.support.AuditingEntityListener
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/schedule
+    password: '880416'
+  application:
+    name: Assignment_Todo_developed
