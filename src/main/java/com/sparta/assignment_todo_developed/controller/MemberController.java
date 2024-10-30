@@ -2,6 +2,7 @@ package com.sparta.assignment_todo_developed.controller;
 
 import com.sparta.assignment_todo_developed.model.dto.member.MemberRequestDto;
 import com.sparta.assignment_todo_developed.model.dto.member.MemberResponseDto;
+import com.sparta.assignment_todo_developed.model.dto.member.SignupRequestDto;
 import com.sparta.assignment_todo_developed.model.dto.member.UpdateRequestDto;
 import com.sparta.assignment_todo_developed.service.business.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,11 @@ public class MemberController {
 
 
     // 사용자 등록
-    @PostMapping
-    public ResponseEntity<MemberResponseDto> registerMember(@RequestBody MemberRequestDto requestDto) {
-        MemberResponseDto memberResponseDto = memberService.createMembers(requestDto);
-        return new ResponseEntity<>(memberResponseDto, HttpStatus.CREATED);
+    @PostMapping("/member")
+    public String signup(SignupRequestDto requestDto) {
+        memberService.save(requestDto);
+        return "redirect:/login";
+
     }
 
 //    @PostMapping()

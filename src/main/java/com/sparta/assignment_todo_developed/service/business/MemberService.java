@@ -3,10 +3,12 @@ package com.sparta.assignment_todo_developed.service.business;
 import com.sparta.assignment_todo_developed.auth.token.JwtTokenProvider;
 import com.sparta.assignment_todo_developed.model.dto.member.MemberRequestDto;
 import com.sparta.assignment_todo_developed.model.dto.member.MemberResponseDto;
+import com.sparta.assignment_todo_developed.model.dto.member.SignupRequestDto;
 import com.sparta.assignment_todo_developed.model.dto.member.UpdateRequestDto;
 import com.sparta.assignment_todo_developed.model.entity.Member;
 import com.sparta.assignment_todo_developed.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.HandlerMapping;
@@ -15,8 +17,15 @@ import org.springframework.web.servlet.HandlerMapping;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final HandlerMapping resourceHandlerMapping;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+    public Long save(SignupRequestDto dto) {
+        return memberRepository.save(Member.builder()
+                .email(dto.getEmail())
+                .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+                .build()).getId();
+    }
 
 
     // 사용자 등록: 회원 가입 기능 구현 후
