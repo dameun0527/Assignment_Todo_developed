@@ -1,6 +1,6 @@
 package com.sparta.assignment_todo_developed.service;
 
-import com.sparta.assignment_todo_developed.auth.JwtTokenProvider;
+import com.sparta.assignment_todo_developed.auth.token.JwtTokenProvider;
 import com.sparta.assignment_todo_developed.dto.member.MemberRequestDto;
 import com.sparta.assignment_todo_developed.dto.member.MemberResponseDto;
 import com.sparta.assignment_todo_developed.dto.member.UpdateRequestDto;
@@ -49,5 +49,10 @@ public class MemberService {
     public void deleteMember(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
         memberRepository.delete(member);
+    }
+
+    public Member findById(Long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(()-> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
     }
 }
