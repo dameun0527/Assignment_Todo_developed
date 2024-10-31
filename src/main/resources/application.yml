@@ -19,3 +19,10 @@ jwt:
   issuer: jisuryu0527@gmail.com
   secret-key: SECRET_KEY
   header: Authorization
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+      hibernate.SQL: DEBUG
+      springframework.data.repository.query: TRACE
